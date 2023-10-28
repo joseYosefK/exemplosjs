@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Usuarios de text</title>
+</head>
+<body class="container bg-warning">
+    <header>
+        <nav class="nav-link">
+            <a href="../ordenando/ordenando.html">1° exemplo</a>
+            <a href="../receitas M/receitas.html">2° exemplo</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Usuários de Teste via
+            REST</h1>
+        <p>Os usuários deste exemplo são fornecidos por uma API de testes <a href="https://reqres.in" style="text-decoration: none;">reqres in</a></p>
+        <div class="container-fluid" id="usuarios">
+            <div class="row justify-content-center">
+                <div 
+                class="card col-md-3 p-1 m-3 " 
+                v-for="(user,index) in users" 
+                :key="index" 
+                style="max-width: 290px;">
+                    <img :src="user.avatar" alt="imagem"class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title">{{user.first_name}} {{user.last_name}}</h4>
+                        <p class="card-text">{{user.email}}</p>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://unpkg.com/vue@3.0.0-rc.5/dist/vue.global.js"></script>
+    <script>
+        //criando uma instancia do vue
+        Vue.createApp({
+            el: "#usuarios",
+            //chamada a função loadUsers dentro do vue.
+            mounted: function (){
+                this.loadUsers()
+            },
+            //criando o array user a ser iterado por v-for
+            data(){return{users:[]
+            }},
+            /*fazendo uma requisição via fetch Api.
+            Convertendo a resposta em um array de ojetos js
+             e atribuindo ao array users*/
+            methods:{
+                async loadUsers(){
+                    var response = await fetch("https://reqres.in/api/users?per_page=10");
+                    var obj = await response.json();
+                    var data = await obj.data;
+                    this.users = data
+                } 
+            }
+        /*apontando o alvo na arvore dom atraves do seu id,
+        para ser manipulada pelo vue*/       
+        }).mount("#usuarios");
+    </script>
+</body>
+</html>
