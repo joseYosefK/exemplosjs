@@ -15,7 +15,7 @@
         </nav>
     </header>
     <main class="container-fluid bg-warning">
-        <div class="flex-wrap row " id="pnlCatalogo" style="justify-content: center;">
+        <div class="flex-wrap row" id="pnlCatalogo" style="justify-content: center;">
         </div>
     </main>
     
@@ -41,7 +41,7 @@
             /* passando o objeto a ser iterado para a função getListaingredientes, que retorna para lista uma string em formato de lista html com cada item do vetor do ojbeto aser iterado.*/
             var lista = getListaIngredientes(receita);
             var card = `<div class="card bg-white col-md-3 m-2">
-                    <img class="card-img-top" src="${receita.imagem}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 5px;">
+                    <img class="card-img-top " src="${receita.imagem}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 5px;">
                     <div class="card-body">
                         <h1 class="card-title">${receita.titulo}</h1>
                         <hr>
